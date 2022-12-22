@@ -54,11 +54,14 @@ RUN groupadd -g 1000 $GROUP && useradd -u 1000 -ms /bin/bash -g $GROUP $USER
 # RUN groupadd --force -g $WWWGROUP sail
 # RUN useradd -ms /bin/bash --no-user-group -g $WWWGROUP -u 1337 sail
 
-COPY start-container /usr/local/bin/start-container
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
-COPY php.ini /etc/php/8.1/cli/conf.d/99-sail.ini
+RUN cp start-container /usr/local/bin/start-container
+RUN cp supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+RUN cp php.ini /etc/php/8.1/cli/conf.d/99-sail.ini
 RUN chmod +x /usr/local/bin/start-container
 
 EXPOSE 8000
 
 ENTRYPOINT ["start-container"]
+
+
+
